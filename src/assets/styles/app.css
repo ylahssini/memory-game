@@ -7,18 +7,27 @@
     margin: 0;
 }
 
+:root {
+    --dark: #181921;
+}
+
 html, body {
     height: 100%;
-    font-family: 'Atma', cursive;
+    font-family: 'Baloo Paaji 2', cursive;
     font-size: 16px;
     font-weight: 300;
+    overflow: hidden;
 }
 
 body {
     line-height: 1;
-    background-color: rgb(17, 18, 28);
-    color: white;
+    background: #f3f4f3;
+    background: radial-gradient(circle, #fdf7f7 0%, #f3f4f3 100%);
+    color: var(--dark);
     -webkit-font-smoothing: antialiased;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 img, picture, video, canvas, svg {
@@ -43,5 +52,35 @@ ul, ol, li {
     padding: 0;
     margin: 0;
     list-style: none;
+}
+
+a {
+    color: dodgerblue;
+    text-decoration: none;
+    transition: color .2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    display: inline-block;
+}
+
+a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: darkcyan;
+    opacity: 0;
+    transition: opacity .3s, transform .2s;
+}
+
+a:hover::after,
+a:focus::after {
+    opacity: 1;
+    transform: translate3d(0, 0.2em, 0);
+}
+
+a:hover {
+    color: darkcyan;
 }
 /* C S S   R E S E T */
