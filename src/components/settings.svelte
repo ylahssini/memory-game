@@ -3,6 +3,8 @@
     import dc from '../assets/images/dc.png';
     import starwars from '../assets/images/starwars.png';
     import nintendo from '../assets/images/nintendo.png';
+    import { settings } from '../store/store';
+    import type { SizeValues, ThemeValues } from '../store/store';
 
     let themes = [
         { value: 'marvel', label: 'Marvel', bg: `url(${marvel}) no-repeat center top #f13333` },
@@ -11,9 +13,15 @@
         { value: 'nintendo', label: 'Nintendo', bg: `url(${nintendo}) no-repeat center top #fff` },
     ];
 
-    let grids = [4, 6];
+    let sizes = [4, 6];
 
-    let selectedTheme: string;
+    function handleTheme(event: Event) {
+        settings.setTheme((event.target as HTMLInputElement).value as ThemeValues);
+    }
+
+    function handleSize(event: Event) {
+        settings.setSize((event.target as HTMLInputElement).value as SizeValues);
+    }
 </script>
 
 <div>
@@ -21,7 +29,14 @@
     <ul>
         {#each themes as theme}
             <li>
-                <input type="radio" name="theme" value={theme.value} id={theme.value} bind:group={selectedTheme}>
+                <input
+                    type="radio"
+                    name="theme"
+                    value={theme.value}
+                    id={theme.value}
+                    checked={$settings.theme === theme.value}
+                    on:change={handleTheme}
+                >
                 <label for="{theme.value}">
                     <span>{theme.label}</span>
                     <span style="background: {theme.bg}"></span>
@@ -32,15 +47,22 @@
 
     <p>Choose the size of grid</p>
     <ul>
-        {#each grids as grid }
+        {#each sizes as size }
             <li>
-                <input type="radio" name="size" value="{grid}x{grid}" id="{grid}x{grid}">
-                <label for="{grid}x{grid}">
-                    <span>{grid}x{grid}</span>
+                <input
+                    type="radio"
+                    name="size"
+                    value="{size}"
+                    id="{size}x{size}"
+                    checked={$settings.size === size.toString()}
+                    on:change={handleSize}
+                >
+                <label for="{size}x{size}">
+                    <span>{size}x{size}</span>
                     <span>
                         <span>
-                            {#each Array(grid * grid) as i }
-                                <i style="width: calc(100% / {grid})"></i>
+                            {#each Array(size * size) as _ }
+                                <i style="width: calc(100% / {size})"></i>
                             {/each}
                         </span>
                     </span>
@@ -49,7 +71,7 @@
         {/each}
     </ul>
 
-    <button type="button">
+    <button type="button" disabled={!$settings.theme && !$settings.size}>
         Start playing
     </button>
 </div>
@@ -101,13 +123,14 @@
                 > span:nth-of-type(1) {
                     box-shadow: 0 0 0 rgba(0, 0, 0, 0);
                     background-color: #fff;
-                    text-align: center;
                     font-size: 1.35rem;
+                    font-weight: 700;
                     overflow: hidden;
                     display: flex;
-                    transform: rotateY(0deg) translateX(0);
                     justify-content: center;
                     align-items: center;
+                    transform: rotateY(0deg) translateX(0);
+                    text-align: center;
                 }
 
                 > span:nth-of-type(2) {
@@ -184,6 +207,16 @@
         &:hover {
             background-color: var(--dark);
             color: #fff;
+        }
+
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+
+            &:hover {
+                background-color: #fff;
+                color: var(--dark);
+            }
         }
     }
 </style>
