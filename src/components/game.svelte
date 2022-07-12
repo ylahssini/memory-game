@@ -35,17 +35,17 @@
     });
 </script>
 
-<ul class="__{$settings.size}">
+<section class="__{$settings.size}">
     {#each Array(grid) as i}
-        <li>
+        <button type="button">
             <header style="background: url('{image}') no-repeat center center / contain"></header>
             <footer></footer>
-        </li>
+        </button>
     {/each}
-</ul>
+</section>
 
 <style lang="scss">
-    ul {
+    section {
         display: grid;
         gap: .5rem;
         
@@ -69,7 +69,7 @@
             }
         }
 
-        > li {
+        > button {
             position: relative;
 
             &:hover > header {
