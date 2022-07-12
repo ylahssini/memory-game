@@ -21,9 +21,7 @@
 	</section>
 	<footer>
 		<p>
-			&copy; All rights reserved. Created by <a href="https://ylahssini.vercel.app" target="_blank"
-				>Youssef Lahssini</a
-			>
+			&copy; All rights reserved. Created by <a href="https://ylahssini.vercel.app" target="_blank">Youssef Lahssini</a>
 		</p>
 		<p>
 			Code source in <a href="https://github.com/ylahssini/memory-game" target="_blank">Github</a>

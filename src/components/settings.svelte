@@ -1,16 +1,13 @@
 <script lang="ts">
-    import marvel from '../assets/images/marvel.png';
-    import dc from '../assets/images/dc.png';
-    import starwars from '../assets/images/starwars.png';
-    import nintendo from '../assets/images/nintendo.png';
-    import { settings } from '../store/store';
-    import type { SizeValues, ThemeValues } from '../store/store';
+    import images from '../utils/themes';
+    import { settings, view } from '../utils/store';
+    import type { SizeValues, ThemeValues } from '../utils/store';
 
     let themes = [
-        { value: 'marvel', label: 'Marvel', bg: `url(${marvel}) no-repeat center top #f13333` },
-        { value: 'dc', label: 'DC', bg: `url(${dc}) no-repeat center top #fff` },
-        { value: 'starwars', label: 'Star wars', bg: `url(${starwars}) no-repeat center top #070809` },
-        { value: 'nintendo', label: 'Nintendo', bg: `url(${nintendo}) no-repeat center top #fff` },
+        { value: 'marvel', label: 'Marvel', bg: `url(${images.marvel}) no-repeat center top #f13333` },
+        { value: 'dc', label: 'DC', bg: `url(${images.dc}) no-repeat center top #fff` },
+        { value: 'starwars', label: 'Star wars', bg: `url(${images.starwars}) no-repeat center top #070809` },
+        { value: 'nintendo', label: 'Nintendo', bg: `url(${images.nintendo}) no-repeat center top #fff` },
     ];
 
     let sizes = [4, 6];
@@ -21,6 +18,10 @@
 
     function handleSize(event: Event) {
         settings.setSize((event.target as HTMLInputElement).value as SizeValues);
+    }
+
+    function handlePlay() {
+        view.set('game');
     }
 </script>
 
@@ -71,7 +72,7 @@
         {/each}
     </ul>
 
-    <button type="button" disabled={!$settings.theme && !$settings.size}>
+    <button type="button" disabled={!$settings.theme && !$settings.size} on:click={handlePlay}>
         Start playing
     </button>
 </div>
@@ -107,12 +108,12 @@
                 }
 
                 > span {
-                    transition: transform .5s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow .3s ease-out;
-                    transform-style: preserve-3d;
                     display: block;
                     width: 100%;
                     height: 100%;
                     backface-visibility: hidden;
+                    transition: transform .5s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow .3s ease-out;
+                    transform-style: preserve-3d;
                     border-radius: 9px;
                     cursor: pointer;
                     position: absolute;
