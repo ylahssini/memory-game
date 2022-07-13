@@ -98,7 +98,6 @@
                 });
 
                 flip = { first: null, second: null };
-
                 return true;
             }
 
