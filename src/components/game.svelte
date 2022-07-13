@@ -2,7 +2,7 @@
     import { afterUpdate, onMount } from 'svelte';
     import themes from '../utils/themes';
     import cards from '../utils/cards';
-    import { settings } from '../utils/store';
+    import { settings, count } from '../utils/store';
     import { rand, sleep } from '../utils/functions';
 
     interface BoardCell {
@@ -57,8 +57,10 @@
 
                 return true;
             }
-            
+
             if (!flip.second) {
+                count.set($count + 1);
+
                 flip.second = cell.key;
                 board[index] = { ...board[index], open: true, show: true };
 
@@ -148,6 +150,7 @@
 
         > button {
             cursor: pointer;
+
             display: block;
             position: relative;
 

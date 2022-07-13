@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Monitor from '../components/monitor.svelte';
 	import '../assets/styles/app.css';
 </script>
 
@@ -15,17 +16,14 @@
 <main>
 	<header>
 		<h1>Memory<br />Game</h1>
+		<Monitor />
 	</header>
 	<section>
 		<slot />
 	</section>
 	<footer>
-		<p>
-			&copy; All rights reserved. Created by <a href="https://ylahssini.vercel.app" target="_blank">Youssef Lahssini</a>
-		</p>
-		<p>
-			Code source in <a href="https://github.com/ylahssini/memory-game" target="_blank">Github</a>
-		</p>
+		<p>&copy; All rights reserved. Created by <a href="https://ylahssini.vercel.app" target="_blank">Youssef Lahssini</a></p>
+		<p>Code source in <a href="https://github.com/ylahssini/memory-game" target="_blank">Github</a></p>
 	</footer>
 </main>
 
@@ -34,7 +32,7 @@
 		display: grid;
 		grid-template-columns: 1fr;
 		gap: 1rem;
-		grid-template-rows: 0.2fr 2.7fr 0.1fr;
+		grid-template-rows: 90px 2.7fr 0.1fr;
 		grid-template-areas: 'header' 'content' 'footer';
 		width: 800px;
 	}
@@ -46,6 +44,7 @@
 		justify-content: space-between;
         padding: 0 0 0.7rem;
         border-bottom: 3px solid var(--dark);
+		overflow: hidden;
 	}
 
 	h1 {
