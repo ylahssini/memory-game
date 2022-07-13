@@ -20,3 +20,4 @@ function createSettings() {
 
 export const view = writable('settings' as 'settings' | 'game' | 'result');
 export const settings = createSettings();
+export const count = writable(0);

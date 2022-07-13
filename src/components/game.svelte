@@ -1,31 +1,40 @@
 <script lang="ts">
-    import { onMount } from 'svelte';
+    import { afterUpdate, onMount } from 'svelte';
     import themes from '../utils/themes';
     import cards from '../utils/cards';
     import { settings } from '../utils/store';
+    import { rand, sleep } from '../utils/functions';
+
+    interface BoardCell {
+        key: string;
+        bg: string;
+        open: boolean;
+        show: boolean;
+        matched: boolean;
+    }
 
     let grid = Math.pow(parseInt($settings.size as string, 10), 2);
     let theme = $settings.theme as string;
-    // @ts-ignore
-    let image = themes[theme];
+    let image = (themes as Record<string, any>)[theme];
 
-    function randomNumber(min: number, max: number): number {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
+    let flip = { first: null, second: null } as { first: string | null, second: string | null };
+    let board: BoardCell[] = [];
 
     onMount(() => {
-        const exactNumber = grid / 2;
+        let cardKeys = Object.keys((cards as Record<string, any>)[theme]).slice(0, grid / 2);
 
-        // @ts-ignore
-        let cardKeys = Object.keys(cards[theme]).slice(0, exactNumber);
-
-        const board: any[] = [];
         for (let i = 0; i < grid; i += 1) {
             if (!board[i]) {
-                const cell = randomNumber(0, cardKeys.length - 1);
+                const cell = rand(0, cardKeys.length - 1);
                 const cardKey = cardKeys[cell];
 
-                board[i] = { open: false, key: cardKey };
+                board[i] = {
+                    key: cardKey,
+                    bg: (cards as Record<string, any>)[theme][cardKey],
+                    open: false,
+                    show: false,
+                    matched: false,
+                };
 
                 if (board.filter((cell) => cell.key === cardKey).length === 2) {
                     cardKeys.splice(cardKeys.indexOf(cardKey), 1);
@@ -33,27 +42,95 @@
             }
         }
     });
+
+    afterUpdate(() => {
+        if (board.every((card) => card.matched)) {
+            console.log('WIN');
+        }
+    });
+  
+    function handleFlip(cell: BoardCell, index: number): () => void {
+        return async (): Promise<boolean> => {
+            if (!flip.first) {
+                flip.first = cell.key;
+                board[index] = { ...board[index], open: true, show: true };
+
+                return true;
+            }
+            
+            if (!flip.second) {
+                flip.second = cell.key;
+                board[index] = { ...board[index], open: true, show: true };
+
+                await sleep(500);
+
+                if (flip.first === flip.second) {
+                    board = board.map((card) => {
+                        if (card.key === cell.key) {
+                            return { ...card, matched: true };
+                        }
+
+                        return card;
+                    });
+
+                    flip = { first: null, second: null };
+                    return true;
+                }
+
+                board = board.map((card) => {
+                    if (card.key === flip.first || card.key === flip.second) {
+                        return { ...card, open: false };
+                    }
+
+                    return card;
+                });
+
+                await sleep(500);
+
+                board = board.map((card) => {
+                    if (card.key === flip.first || card.key === flip.second) {
+                        return { ...card, show: false };
+                    }
+
+                    return card;
+                });
+
+                flip = { first: null, second: null };
+
+                return true;
+            }
+
+            return false;
+        }
+    }
 </script>
 
-<section class="__{$settings.size}">
-    {#each Array(grid) as i}
-        <button type="button">
-            <header style="background: url('{image}') no-repeat center center / contain"></header>
-            <footer></footer>
-        </button>
-    {/each}
-</section>
+{#if grid === board.length}
+    <section class="__{$settings.size}">
+        {#each Array(grid) as _, i}
+            <button
+                type="button"
+                on:click={handleFlip(board[i], i)}
+                class:__flipped={board[i].open}
+                disabled={board[i].open}
+            >
+                <header style="background: url('{image}') no-repeat center center / contain"></header>
+                <footer style={board[i].show ? `background: url('${board[i].bg}') no-repeat center center / contain` : undefined}></footer>
+            </button>
+        {/each}
+    </section>
+{/if}
 
 <style lang="scss">
     section {
         display: grid;
         gap: .5rem;
-        
+
         &.__4 {
             grid-template-columns: repeat(4, 1fr);
             grid-template-rows: repeat(4, 1fr);
 
-            > li {
+            > button {
                 width: 138px;
                 height: 138px;
             }
@@ -63,41 +140,54 @@
             grid-template-columns: repeat(6, 1fr);
             grid-template-rows: repeat(6, 1fr);
 
-            > li {
+            > button {
                 width: 100px;
                 height: 100px;
             }
         }
 
         > button {
+            cursor: pointer;
+            display: block;
             position: relative;
 
             &:hover > header {
-                box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
                 transform: rotateY(0deg) translateX(0) translateY(-3px);
+            }
+
+            &:disabled {
+                cursor: not-allowed;
             }
 
             > header, > footer {
                 border-radius: 9px;
                 width: 100%;
                 height: 100%;
-                box-shadow: 0 0 0 rgba(0, 0, 0, 0.2);
                 backface-visibility: hidden;
-                transition: transform .3s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow .3s ease-out;
+                transition: transform .5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
                 transform-style: preserve-3d;
                 border-radius: 9px;
-                cursor: pointer;
                 position: absolute;
                 inset: 0;
                 transform-origin: center center;
             }
 
             > header {
-                transform: rotateY(0deg) translateX(0) translateY(0);
+                transform: rotateY(0deg) translateX(0);
             }
 
             > footer {
                 transform: rotateY(-180deg) translateX(50%);
+            }
+
+            &.__flipped {
+                > header {
+                    transform: rotateY(-180deg) translateX(50%);
+                }
+
+                > footer {
+                    transform: rotateY(0deg) translateX(0);
+                }
             }
         }
     }
