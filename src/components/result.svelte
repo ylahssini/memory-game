@@ -1,3 +1,88 @@
-<div>
-    <h2>Bravo</h2>
-</div>
+<script lang="ts">
+    import { moves, view, timer, settings } from '../utils/store';
+    import { timerFormat } from '../utils/functions';
+
+    const result = $moves * 1.5;
+    const title = 'Not bad! You can do better';
+
+    function handleSettings() {
+        view.set('settings');
+        moves.set(0);
+        settings.setSize(null);
+        settings.setTheme(null);
+    }
+
+    function handleTry() {
+        view.set('game');
+        moves.set(0);
+    }
+</script>
+
+<section>
+    <h2>{title}</h2>
+    <p>Check your score</p>
+
+    <div>
+        <h3>
+            <strong>{$moves}</strong>
+            <small>Moves</small>
+        </h3>
+        <h3>
+            <strong>{$timer}</strong>
+            <small>Time</small>
+        </h3>
+    </div>
+
+    <footer>
+        <button type="button" class="btn" on:click={handleSettings}>Go to settings</button>
+        <button type="button" class="btn" on:click={handleTry}>Try again</button>
+    </footer>
+</section>
+
+<style lang="scss">
+    h2 {
+        display: block;
+        font-weight: 700;
+        font-size: 3rem;
+        text-align: center;
+        padding: 3rem 0 0;
+    }
+
+    p {
+        font-size: 1.35rem;
+        padding: 0 0 3rem;
+        text-align: center;
+    }
+
+    div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5rem;
+        background-color: white;
+        padding: 3rem 10rem;
+        border-radius: 9px;
+    }
+
+    h3 {
+        color: #555;
+        font-size: 1.25rem;
+        font-weight: 400;
+        text-align: center;
+    }
+
+    strong {
+        color: var(--dark);
+        display: block;
+        font-weight: 700;
+        font-size: 3rem;
+    }
+
+    footer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        padding-top: 2rem;
+    }
+</style>

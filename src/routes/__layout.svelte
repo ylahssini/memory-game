@@ -28,6 +28,35 @@
 </main>
 
 <style lang="scss">
+	:global(.btn) {
+		background-color: #fff;
+        border: 2px solid var(--dark);
+        border-radius: 9px;
+        color: var(--dark);
+        cursor: pointer;
+        display: block;
+        font-size: 1.4rem;
+        font-weight: 700;
+        padding: 1rem 2rem;
+        transition: all .3s ease-out;
+        width: fit-content;
+
+        &:hover {
+            background-color: var(--dark);
+            color: #fff;
+        }
+
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+
+            &:hover {
+                background-color: #fff;
+                color: var(--dark);
+            }
+        }
+	}
+
 	main {
 		display: grid;
 		grid-template-columns: 1fr;

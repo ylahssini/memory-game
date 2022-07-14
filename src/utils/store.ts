@@ -1,6 +1,7 @@
-import { writable } from 'svelte/store';
+import { writable, readable } from 'svelte/store';
+import { timerFormat } from './functions';
 
-export type SizeValues = '4x4' | '6x6' | null;
+export type SizeValues = '4' | '6' | null;
 export type ThemeValues = 'marvel' | 'dc' | 'starwars' | 'nintendo' | null;
 
 interface SettingsProps {
@@ -20,4 +21,15 @@ function createSettings() {
 
 export const view = writable('settings' as 'settings' | 'game' | 'result');
 export const settings = createSettings();
-export const count = writable(0);
+export const moves = writable(0);
+export const timer = readable('00:00', function (set) {
+    const date = new Date(2022, 1, 1, 0, 0, 0);
+    const interval = setInterval(() => {
+        date.setSeconds(date.getSeconds() + 1);
+        set(timerFormat(date));
+    }, 1000);
+
+    return function stop() {
+        clearInterval(interval);
+    }
+});

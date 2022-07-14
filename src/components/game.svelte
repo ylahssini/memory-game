@@ -2,7 +2,7 @@
     import { afterUpdate, onMount } from 'svelte';
     import themes from '../utils/themes';
     import cards from '../utils/cards';
-    import { settings, count } from '../utils/store';
+    import { settings, moves, view } from '../utils/store';
     import { rand, sleep } from '../utils/functions';
 
     interface BoardCell {
@@ -13,7 +13,7 @@
         matched: boolean;
     }
 
-    let grid = Math.pow(parseInt($settings.size as string, 10), 2);
+    const grid = Math.pow(parseInt($settings.size as string, 10), 2);
     let theme = $settings.theme as string;
     let image = (themes as Record<string, any>)[theme];
 
@@ -45,7 +45,7 @@
 
     afterUpdate(() => {
         if (board.every((card) => card.matched)) {
-            console.log('WIN');
+            view.set('result');
         }
     });
   
@@ -59,7 +59,7 @@
             }
 
             if (!flip.second) {
-                count.set($count + 1);
+                moves.set($moves + 1);
 
                 flip.second = cell.key;
                 board[index] = { ...board[index], open: true, show: true };

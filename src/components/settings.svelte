@@ -53,7 +53,7 @@
                 <input
                     type="radio"
                     name="size"
-                    value="{size}"
+                    value={size}
                     id="{size}x{size}"
                     checked={$settings.size === size.toString()}
                     on:change={handleSize}
@@ -72,9 +72,11 @@
         {/each}
     </ul>
 
-    <button type="button" disabled={!$settings.theme && !$settings.size} on:click={handlePlay}>
-        Start playing
-    </button>
+    <footer>
+        <button type="button" class="btn" disabled={!$settings.theme || !$settings.size} on:click={handlePlay}>
+            Start playing
+        </button>
+    </footer>
 </div>
 
 <style lang="scss">
@@ -191,33 +193,9 @@
         }
     }
 
-    button {
-        background-color: #fff;
-        border: 2px solid var(--dark);
-        border-radius: 9px;
-        color: var(--dark);
-        cursor: pointer;
-        display: block;
-        font-size: 1.4rem;
-        font-weight: 700;
-        padding: 1rem 2rem;
-        margin: 3rem auto;
-        transition: all .3s ease-out;
-        width: fit-content;
-
-        &:hover {
-            background-color: var(--dark);
-            color: #fff;
-        }
-
-        &:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-
-            &:hover {
-                background-color: #fff;
-                color: var(--dark);
-            }
-        }
+    footer {
+        display: flex;
+        justify-content: center;
+        margin: 3rem 0;
     }
 </style>
