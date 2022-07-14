@@ -1,5 +1,4 @@
 import { writable, readable } from 'svelte/store';
-import { timerFormat } from './functions';
 
 export type SizeValues = '4' | '6' | null;
 export type ThemeValues = 'marvel' | 'dc' | 'starwars' | 'nintendo' | null;
@@ -22,14 +21,20 @@ function createSettings() {
 export const view = writable('settings' as 'settings' | 'game' | 'result');
 export const settings = createSettings();
 export const moves = writable(0);
-export const timer = readable('00:00', function (set) {
-    const date = new Date(2022, 1, 1, 0, 0, 0);
+
+export const timer = readable(0, function (set) {
+    const beginningDate = new Date();
+    const beginningTime = beginningTime.getTime();
+    
     const interval = setInterval(() => {
-        date.setSeconds(date.getSeconds() + 1);
-        set(timerFormat(date));
+        const currentDate = new Date();
+        const currentTime = currentDate.getTime();
+
+        set(timerFormat(currentTime - beginningTime));
     }, 1000);
 
     return function stop() {
+        set(0);
         clearInterval(interval);
-    }
+    };
 });
