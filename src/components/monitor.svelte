@@ -16,8 +16,6 @@
 
     afterUpdate(() => {
         if ($board.length > 0 && $board.every((card) => card.matched)) {
-            console.log('done', lapse.getTime());
-
             view.set('result');
             timer.set(lapse.getTime());
             clearInterval(interval);
