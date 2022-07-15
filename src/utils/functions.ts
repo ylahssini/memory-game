@@ -6,11 +6,11 @@ export async function sleep(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-export function timerFormat(date: Date): string {
+export function timerFormat(time: number): string {
     const formatter = new Intl.DateTimeFormat('default', { 
         minute: 'numeric',
         second: 'numeric',
     });
 
-    return formatter.format(date);
+    return formatter.format(new Date(time));
 }

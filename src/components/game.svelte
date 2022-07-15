@@ -1,59 +1,49 @@
 <script lang="ts">
-    import { afterUpdate, onMount } from 'svelte';
+    import { onMount } from 'svelte';
     import themes from '../utils/themes';
     import cards from '../utils/cards';
-    import { settings, moves, view } from '../utils/store';
+    import { settings, moves, view, board } from '../utils/store';
+    import type { BoardCell } from '../utils/store';
     import { rand, sleep } from '../utils/functions';
-
-    interface BoardCell {
-        key: string;
-        bg: string;
-        open: boolean;
-        show: boolean;
-        matched: boolean;
-    }
 
     const grid = Math.pow(parseInt($settings.size as string, 10), 2);
     let theme = $settings.theme as string;
     let image = (themes as Record<string, any>)[theme];
 
     let flip = { first: null, second: null } as { first: string | null, second: string | null };
-    let board: BoardCell[] = [];
 
     onMount(() => {
         let cardKeys = Object.keys((cards as Record<string, any>)[theme]).slice(0, grid / 2);
 
         for (let i = 0; i < grid; i += 1) {
-            if (!board[i]) {
+            if (!$board[i]) {
                 const cell = rand(0, cardKeys.length - 1);
                 const cardKey = cardKeys[cell];
 
-                board[i] = {
+                board.add(i, {
                     key: cardKey,
                     bg: (cards as Record<string, any>)[theme][cardKey],
                     open: false,
                     show: false,
                     matched: false,
-                };
+                });
 
-                if (board.filter((cell) => cell.key === cardKey).length === 2) {
+                if ($board.filter((cell) => cell.key === cardKey).length === 2) {
                     cardKeys.splice(cardKeys.indexOf(cardKey), 1);
                 }
             }
         }
-    });
 
-    afterUpdate(() => {
-        if (board.every((card) => card.matched)) {
-            view.set('result');
-        }
+        console.log($board);
     });
   
     function handleFlip(cell: BoardCell, index: number): () => void {
         return async (): Promise<boolean> => {
             if (!flip.first) {
                 flip.first = cell.key;
-                board[index] = { ...board[index], open: true, show: true };
+                board.updateByIndex(index, { open: true, show: true });
+
+                console.log('index', index, cell);
 
                 return true;
             }
@@ -62,42 +52,23 @@
                 moves.set($moves + 1);
 
                 flip.second = cell.key;
-                board[index] = { ...board[index], open: true, show: true };
+                board.updateByIndex(index, { open: true, show: true });
 
                 await sleep(500);
 
                 if (flip.first === flip.second) {
-                    board = board.map((card) => {
-                        if (card.key === cell.key) {
-                            return { ...card, matched: true };
-                        }
-
-                        return card;
-                    });
-
+                    board.updateByKeys([cell.key], { matched: true });
                     flip = { first: null, second: null };
+
                     return true;
                 }
 
-                board = board.map((card) => {
-                    if (card.key === flip.first || card.key === flip.second) {
-                        return { ...card, open: false };
-                    }
-
-                    return card;
-                });
-
+                board.updateByKeys([flip.first, flip.second], { open: false });
                 await sleep(500);
-
-                board = board.map((card) => {
-                    if (card.key === flip.first || card.key === flip.second) {
-                        return { ...card, show: false };
-                    }
-
-                    return card;
-                });
+                board.updateByKeys([flip.first, flip.second], { show: false });
 
                 flip = { first: null, second: null };
+
                 return true;
             }
 
@@ -106,17 +77,17 @@
     }
 </script>
 
-{#if grid === board.length}
+{#if grid === $board.length}
     <section class="__{$settings.size}">
         {#each Array(grid) as _, i}
             <button
                 type="button"
-                on:click={handleFlip(board[i], i)}
-                class:__flipped={board[i].open}
-                disabled={board[i].open}
+                on:click={handleFlip($board[i], i)}
+                class:__flipped={$board[i].open}
+                disabled={$board[i].open}
             >
                 <header style="background: url('{image}') no-repeat center center / contain"></header>
-                <footer style={board[i].show ? `background: url('${board[i].bg}') no-repeat center center / contain` : undefined}></footer>
+                <footer style={$board[i].show ? `background: url('${$board[i].bg}') no-repeat center center / contain` : undefined}></footer>
             </button>
         {/each}
     </section>

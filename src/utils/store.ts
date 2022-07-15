@@ -1,5 +1,4 @@
-import { writable, readable } from 'svelte/store';
-import { timerFormat } from './functions';
+import { writable } from 'svelte/store';
 
 export type SizeValues = '4' | '6' | null;
 export type ThemeValues = 'marvel' | 'dc' | 'starwars' | 'nintendo' | null;
@@ -7,6 +6,14 @@ export type ThemeValues = 'marvel' | 'dc' | 'starwars' | 'nintendo' | null;
 interface SettingsProps {
     size: SizeValues;
     theme: ThemeValues;
+}
+
+export interface BoardCell {
+    key: string;
+    bg: string;
+    open: boolean;
+    show: boolean;
+    matched: boolean;
 }
 
 function createSettings() {
@@ -19,17 +26,39 @@ function createSettings() {
     }
 }
 
+function createBoard() {
+    const { subscribe, set, update } = writable([] as BoardCell[]);
+
+    return {
+        subscribe,
+        add: (index: number, card: BoardCell) => update((state) => {
+            state[index] = card;
+            return state;
+        }),
+        updateByIndex: (index: number, payload: Record<string, string | boolean>) => update((state) => (
+            state.map((item, i) => {
+                if (index === i) {
+                    return { ...item, ...payload };
+                }
+
+                return item;
+            })
+        )),
+        updateByKeys: (keys: string[], payload: Record<string, string | boolean>) => update((state) => (
+            state.map((item) => {
+                if (keys.includes(item.key)) {
+                    return { ...item, ...payload };
+                }
+
+                return item;
+            })
+        )),
+        reset: () => set([]),
+    }
+}
+
 export const view = writable('settings' as 'settings' | 'game' | 'result');
 export const settings = createSettings();
+export const board = createBoard();
 export const moves = writable(0);
-export const timer = readable('00:00', function (set) {
-    const date = new Date(2022, 1, 1, 0, 0, 0);
-    const interval = setInterval(() => {
-        date.setSeconds(date.getSeconds() + 1);
-        set(timerFormat(date));
-    }, 1000);
-
-    return function stop() {
-        clearInterval(interval);
-    }
-});
+export const timer = writable(0);

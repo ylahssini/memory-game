@@ -1,5 +1,7 @@
 <script lang="ts">
+	import { fly } from 'svelte/transition';
 	import Monitor from '../components/monitor.svelte';
+	import { view } from '../utils/store';
 	import '../assets/styles/app.css';
 </script>
 
@@ -16,7 +18,11 @@
 <main>
 	<header>
 		<h1>Memory<br />Game</h1>
-		<Monitor />
+		{#if $view === 'game'}
+			<div in:fly={{ duration: 500, y: 100 }} out:fly={{ duration: 500, x: 50 }}>
+				<Monitor />
+			</div>
+		{/if}
 	</header>
 	<section>
 		<slot />

@@ -1,13 +1,16 @@
 <script lang="ts">
-    import { moves, view, timer, settings } from '../utils/store';
+    import { board, moves, view, timer, settings } from '../utils/store';
     import { timerFormat } from '../utils/functions';
 
-    const result = $moves * 1.5;
-    const title = 'Not bad! You can do better';
+    const scale = (parseInt($settings.size as string, 10) ** 2) * 1.5;
+    const result = ($timer - new Date(1970, 0, 1).getTime()) / 1000;
+    const title = scale >= result ? 'Braco, you\'re fast!' : 'Not bad! You can do better';
 
     function handleSettings() {
         view.set('settings');
         moves.set(0);
+        timer.set(0);
+        board.reset();
         settings.setSize(null);
         settings.setTheme(null);
     }
@@ -15,6 +18,8 @@
     function handleTry() {
         view.set('game');
         moves.set(0);
+        timer.set(0);
+        board.reset();
     }
 </script>
 
@@ -28,7 +33,7 @@
             <small>Moves</small>
         </h3>
         <h3>
-            <strong>{$timer}</strong>
+            <time>{timerFormat($timer)}</time>
             <small>Time</small>
         </h3>
     </div>
@@ -71,7 +76,7 @@
         text-align: center;
     }
 
-    strong {
+    strong, time {
         color: var(--dark);
         display: block;
         font-weight: 700;
