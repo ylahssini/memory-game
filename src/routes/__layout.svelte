@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { fly } from 'svelte/transition';
+	import { fly } from 'svelte/transition';
 	import Monitor from '../components/monitor.svelte';
+	import Audio from '../components/audio.svelte';
 	import { view } from '../utils/store';
 	import '../assets/styles/app.css';
 </script>
@@ -20,6 +21,9 @@
 		<h1>Memory<br />Game</h1>
 		{#if $view === 'game'}
 			<div in:fly={{ duration: 500, y: 100 }} out:fly={{ duration: 500, x: 50 }}>
+				<Audio />
+			</div>
+			<div in:fly={{ duration: 500, y: 100 }} out:fly={{ duration: 500, x: 50 }}>
 				<Monitor />
 			</div>
 		{/if}
@@ -28,39 +32,45 @@
 		<slot />
 	</section>
 	<footer>
-		<p>&copy; All rights reserved. Created by <a href="https://ylahssini.vercel.app" target="_blank">Youssef Lahssini</a></p>
-		<p>Code source in <a href="https://github.com/ylahssini/memory-game" target="_blank">Github</a></p>
+		<p>
+			&copy; All rights reserved. Created by <a href="https://ylahssini.vercel.app" target="_blank"
+				>Youssef Lahssini</a
+			>
+		</p>
+		<p>
+			Code source in <a href="https://github.com/ylahssini/memory-game" target="_blank">Github</a>
+		</p>
 	</footer>
 </main>
 
 <style lang="scss">
 	:global(.btn) {
 		background-color: #fff;
-        border: 2px solid var(--dark);
-        border-radius: 9px;
-        color: var(--dark);
-        cursor: pointer;
-        display: block;
-        font-size: 1.4rem;
-        font-weight: 700;
-        padding: 1rem 2rem;
-        transition: all .3s ease-out;
-        width: fit-content;
+		border: 2px solid var(--dark);
+		border-radius: 9px;
+		color: var(--dark);
+		cursor: pointer;
+		display: block;
+		font-size: 1.4rem;
+		font-weight: 700;
+		padding: 1rem 2rem;
+		transition: all 0.3s ease-out;
+		width: fit-content;
 
-        &:hover {
-            background-color: var(--dark);
-            color: #fff;
-        }
+		&:hover {
+			background-color: var(--dark);
+			color: #fff;
+		}
 
-        &:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
+		&:disabled {
+			opacity: 0.5;
+			cursor: not-allowed;
 
-            &:hover {
-                background-color: #fff;
-                color: var(--dark);
-            }
-        }
+			&:hover {
+				background-color: #fff;
+				color: var(--dark);
+			}
+		}
 	}
 
 	main {
@@ -77,9 +87,14 @@
 		display: flex;
 		align-items: flex-end;
 		justify-content: space-between;
-        padding: 0 0 0.7rem;
-        border-bottom: 3px solid var(--dark);
+		padding: 0 0 0.7rem;
+		border-bottom: 3px solid var(--dark);
 		overflow: hidden;
+
+		> div:nth-of-type(1) {
+			margin-left: auto;
+			margin-right: 1rem;
+		}
 	}
 
 	h1 {
@@ -94,9 +109,9 @@
 		grid-area: content;
 		width: 100%;
 		height: 70vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 
 	footer {
@@ -104,7 +119,7 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-        padding-top: 0.7rem;
-        border-top: 1px solid var(--dark);
+		padding-top: 0.7rem;
+		border-top: 1px solid var(--dark);
 	}
 </style>

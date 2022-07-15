@@ -33,8 +33,6 @@
                 }
             }
         }
-
-        console.log($board);
     });
   
     function handleFlip(cell: BoardCell, index: number): () => void {
@@ -42,8 +40,6 @@
             if (!flip.first) {
                 flip.first = cell.key;
                 board.updateByIndex(index, { open: true, show: true });
-
-                console.log('index', index, cell);
 
                 return true;
             }

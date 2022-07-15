@@ -24,8 +24,14 @@
 </script>
 
 <aside class:__show={$view === 'game'}>
-    <span>Moves:</span> <strong>{$moves}</strong><br />
-    <span>Time:</span> <time>{timerFormat(lapse.getTime())}</time>
+    <div>
+        <span>Moves:</span>
+        <strong>{$moves}</strong>
+    </div>
+    <div>
+        <span>Time:</span>
+        <time>{timerFormat(lapse.getTime())}</time>
+    </div>
 </aside>
 
 <style lang="scss">
@@ -35,9 +41,22 @@
         text-align: right;
         transform: translateY(3rem);
         transition: all .2s cubic-bezier(0.215, 0.610, 0.355, 1);
+        width: 125px;
 
-        > strong, time {
-            font-weight: 700;
+        > div {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            > strong, time {
+                font-weight: 700;
+            }
+
+            > strong:before {
+                content: "0";
+                display: inline;
+                font-weight: 700;
+            }
         }
 
         &.__show {
