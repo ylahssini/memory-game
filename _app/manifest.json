@@ -7,6 +7,18 @@
     "file": "immutable/assets/nintendo-2a86ebc5.png",
     "src": "src/assets/images/nintendo.png"
   },
+  "src/assets/audio/starwars.mp3": {
+    "file": "immutable/assets/starwars-88923668.mp3",
+    "src": "src/assets/audio/starwars.mp3"
+  },
+  "src/assets/audio/dc.mp3": {
+    "file": "immutable/assets/dc-6da633ac.mp3",
+    "src": "src/assets/audio/dc.mp3"
+  },
+  "src/assets/audio/marvel.mp3": {
+    "file": "immutable/assets/marvel-d1f1f90a.mp3",
+    "src": "src/assets/audio/marvel.mp3"
+  },
   "src/assets/images/dc/atom.webp": {
     "file": "immutable/assets/atom-bbe61524.webp",
     "src": "src/assets/images/dc/atom.webp"
@@ -14,6 +26,10 @@
   "src/assets/images/dc/firestorm.webp": {
     "file": "immutable/assets/firestorm-c05260c9.webp",
     "src": "src/assets/images/dc/firestorm.webp"
+  },
+  "src/assets/audio/nintendo.mp3": {
+    "file": "immutable/assets/nintendo-e2d89386.mp3",
+    "src": "src/assets/audio/nintendo.mp3"
   },
   "src/assets/images/nintendo/bowser.webp": {
     "file": "immutable/assets/bowser-b768a69f.webp",
@@ -43,24 +59,8 @@
     "file": "immutable/assets/r2-d2-ca975ba2.webp",
     "src": "src/assets/images/starwars/r2-d2.webp"
   },
-  "src/assets/audio/dc.mp3": {
-    "file": "immutable/assets/dc-6da633ac.mp3",
-    "src": "src/assets/audio/dc.mp3"
-  },
-  "src/assets/audio/starwars.mp3": {
-    "file": "immutable/assets/starwars-88923668.mp3",
-    "src": "src/assets/audio/starwars.mp3"
-  },
-  "src/assets/audio/marvel.mp3": {
-    "file": "immutable/assets/marvel-d1f1f90a.mp3",
-    "src": "src/assets/audio/marvel.mp3"
-  },
-  "src/assets/audio/nintendo.mp3": {
-    "file": "immutable/assets/nintendo-e2d89386.mp3",
-    "src": "src/assets/audio/nintendo.mp3"
-  },
   ".svelte-kit/runtime/client/start.js": {
-    "file": "immutable/start-522faef6.js",
+    "file": "immutable/start-65f53476.js",
     "src": ".svelte-kit/runtime/client/start.js",
     "isEntry": true,
     "imports": [
