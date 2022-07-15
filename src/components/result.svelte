@@ -4,7 +4,7 @@
 
     const scale = (parseInt($settings.size as string, 10) ** 2) * 1.5;
     const result = ($timer - new Date(1970, 0, 1).getTime()) / 1000;
-    const title = scale >= result ? 'Braco, you\'re fast!' : 'Not bad! You can do better';
+    const title = scale >= result ? 'Bravo, you\'re fast!' : 'Not bad! You can do better';
 
     function handleSettings() {
         view.set('settings');
