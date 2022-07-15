@@ -1,5 +1,5 @@
 <script lang="ts">
-import { afterUpdate, onMount } from 'svelte';
+    import { afterUpdate, onMount } from 'svelte';
 
     import { view, settings } from '../utils/store';
     import audio from '../utils/audio';
