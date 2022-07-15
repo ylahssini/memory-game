@@ -1,19 +1,19 @@
 {
-  "src/assets/audio/dc.mp3": {
-    "file": "immutable/assets/dc-6da633ac.mp3",
-    "src": "src/assets/audio/dc.mp3"
-  },
   "src/assets/audio/starwars.mp3": {
     "file": "immutable/assets/starwars-88923668.mp3",
     "src": "src/assets/audio/starwars.mp3"
   },
-  "src/assets/images/nintendo.png": {
-    "file": "immutable/assets/nintendo-2a86ebc5.png",
-    "src": "src/assets/images/nintendo.png"
-  },
   "src/assets/images/dc.png": {
     "file": "immutable/assets/dc-5a421263.png",
     "src": "src/assets/images/dc.png"
+  },
+  "src/assets/audio/dc.mp3": {
+    "file": "immutable/assets/dc-6da633ac.mp3",
+    "src": "src/assets/audio/dc.mp3"
+  },
+  "src/assets/images/nintendo.png": {
+    "file": "immutable/assets/nintendo-2a86ebc5.png",
+    "src": "src/assets/images/nintendo.png"
   },
   "src/assets/audio/marvel.mp3": {
     "file": "immutable/assets/marvel-d1f1f90a.mp3",
@@ -60,7 +60,7 @@
     "src": "src/assets/images/starwars/r2-d2.webp"
   },
   ".svelte-kit/runtime/client/start.js": {
-    "file": "immutable/start-17806865.js",
+    "file": "immutable/start-cb7bae2f.js",
     "src": ".svelte-kit/runtime/client/start.js",
     "isEntry": true,
     "imports": [
@@ -144,12 +144,12 @@
       "_index-4b1c8d92.js"
     ]
   },
-  "src/routes/index.css": {
-    "file": "immutable/assets/index-73904423.css",
-    "src": "src/routes/index.css"
-  },
   "src/routes/__layout.css": {
     "file": "immutable/assets/__layout-50156ad2.css",
     "src": "src/routes/__layout.css"
+  },
+  "src/routes/index.css": {
+    "file": "immutable/assets/index-73904423.css",
+    "src": "src/routes/index.css"
   }
 }
