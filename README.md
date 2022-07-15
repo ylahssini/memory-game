@@ -1,4 +1,5 @@
 # Memory game
+Memory game is game to match similar cards, you can play with different themes like Marvel, DC, Starwars and Nintento. It made by Svelte and you can see the demo: [https://ylahssini.github.io/memory-game/](https://ylahssini.github.io/memory-game/)
 
 ## create-svelte
 
