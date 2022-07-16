@@ -7,7 +7,8 @@
 		"preview": "vite preview",
 		"lint": "prettier --check --plugin-search-dir=. . && eslint .",
 		"format": "prettier --write --plugin-search-dir=. .",
-		"deploy": "node ./gh-pages.js"
+		"deploy": "node ./gh-pages.js",
+		"subtree-push": "git subtree push --prefix build origin gh-pages"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "next",
