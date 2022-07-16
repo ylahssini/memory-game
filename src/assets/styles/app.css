@@ -9,6 +9,8 @@
 
 :root {
     --dark: #181921;
+    --primary: #7b0606;
+    --secondary: #ce0707;
 }
 
 html, body {
@@ -55,7 +57,7 @@ ul, ol, li {
 }
 
 a {
-    color: crimson;
+    color: var(--secondary);
     text-decoration: none;
     transition: color .2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     position: relative;
@@ -69,7 +71,7 @@ a::after {
     left: 0;
     width: 100%;
     height: 1px;
-    background-color: darkred;
+    background-color: var(--primary);
     opacity: 0;
     transition: opacity .3s, transform .2s;
 }
@@ -81,6 +83,6 @@ a:focus::after {
 }
 
 a:hover {
-    color: darkred;
+    color: var(--primary);
 }
 /* C S S   R E S E T */
