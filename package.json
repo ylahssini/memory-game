@@ -1,5 +1,7 @@
 {
-	"name": "my-app",
+	"name": "memory-game",
+	"author": "Youssef Lahssini",
+	"homepage": "https://ylahssini.github.io/memory-game/",
 	"version": "0.0.1",
 	"scripts": {
 		"dev": "vite dev",
