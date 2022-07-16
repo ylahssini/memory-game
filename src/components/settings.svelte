@@ -62,7 +62,7 @@
                     <span>{size}x{size}</span>
                     <span>
                         <span>
-                            {#each Array(Math.pow(size, 2)) as _ }
+                            {#each Array(size ** 2) as _ }
                                 <i style="width: calc(100% / {size})"></i>
                             {/each}
                         </span>

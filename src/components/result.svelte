@@ -2,9 +2,12 @@
     import { board, moves, view, timer, settings } from '../utils/store';
     import { timerFormat } from '../utils/functions';
 
-    const scale = (parseInt($settings.size as string, 10) ** 2) * 1.5;
+    const scale = ((parseInt($settings.size as string, 10) ** 2) * 1.5) + 2;
     const result = ($timer - new Date(1970, 0, 1).getTime()) / 1000;
-    const title = scale >= result ? 'Bravo, you\'re fast!' : 'Not bad! You can do better';
+
+    let title = 'Not bad! You can do better';
+    if (scale >= result) title = 'Bravo, you\'re fast!';
+    if ((scale * 2) < result) title = 'Oh man! you\'re very slow';
 
     function handleSettings() {
         view.set('settings');

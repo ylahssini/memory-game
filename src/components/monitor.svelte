@@ -1,6 +1,6 @@
 <script lang="ts">
     import { afterUpdate, onMount } from 'svelte';
-    import { timerFormat } from '../utils/functions';
+    import { timerFormat, sleep } from '../utils/functions';
     import { board, moves, view, timer } from '../utils/store';
 
     let interval: NodeJS.Timeout;
@@ -14,8 +14,10 @@
         }, 1000);
     });
 
-    afterUpdate(() => {
+    afterUpdate(async () => {
         if ($board.length > 0 && $board.every((card) => card.matched)) {
+            await sleep(1000);
+
             view.set('result');
             timer.set(lapse.getTime());
             clearInterval(interval);

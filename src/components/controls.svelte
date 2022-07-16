@@ -1,8 +1,8 @@
 <script lang="ts">
     import { afterUpdate, onMount } from 'svelte';
-
     import { view, settings } from '../utils/store';
     import audio from '../utils/audio';
+    import { sleep } from '../utils/functions';
 
     let player: HTMLAudioElement | null = null;
     let paused = false;
@@ -13,8 +13,13 @@
         player.play();
     });
 
-    afterUpdate(() => {
+    afterUpdate(async () => {
         if ($view === 'result' && player) {
+            for (let i of Array(10)) {
+                player.volume -= 0.1;
+                await sleep(200);
+            }
+
             player.pause();
             player = null;
         }

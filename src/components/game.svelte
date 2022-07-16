@@ -6,7 +6,7 @@
     import type { BoardCell } from '../utils/store';
     import { rand, sleep } from '../utils/functions';
 
-    const grid = Math.pow(parseInt($settings.size as string, 10), 2);
+    const grid = parseInt($settings.size as string, 10) ** 2;
     let theme = $settings.theme as string;
     let image = (themes as Record<string, any>)[theme];
 
