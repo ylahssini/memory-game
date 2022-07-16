@@ -10,6 +10,7 @@
     onMount(() => {
         player = new Audio((audio as Record<string, any>)[$settings.theme as string]);
         player.loop = true;
+        player.volume = 1;
         player.play();
     });
 
