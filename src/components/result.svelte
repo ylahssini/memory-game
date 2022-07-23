@@ -2,7 +2,8 @@
     import { board, moves, view, timer, settings } from '../utils/store';
     import { timerFormat } from '../utils/functions';
 
-    const scale = ((parseInt($settings.size as string, 10) ** 2) * 1.5) + 2;
+    const size = parseInt($settings.size as string, 10);
+    const scale = ((size ** 2) * 1.5) + size;
     const result = ($timer - new Date(1970, 0, 1).getTime()) / 1000;
 
     let title = 'Not bad! You can do better';

@@ -116,7 +116,6 @@
 
         > button {
             cursor: pointer;
-
             display: block;
             position: relative;
 
