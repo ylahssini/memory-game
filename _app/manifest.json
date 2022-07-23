@@ -1,0 +1,156 @@
+{
+  "src/assets/images/dc.png": {
+    "file": "immutable/assets/dc-5a421263.png",
+    "src": "src/assets/images/dc.png"
+  },
+  "src/assets/images/nintendo.png": {
+    "file": "immutable/assets/nintendo-2a86ebc5.png",
+    "src": "src/assets/images/nintendo.png"
+  },
+  "src/assets/audio/dc.mp3": {
+    "file": "immutable/assets/dc-6da633ac.mp3",
+    "src": "src/assets/audio/dc.mp3"
+  },
+  "src/assets/audio/starwars.mp3": {
+    "file": "immutable/assets/starwars-0fa7f57f.mp3",
+    "src": "src/assets/audio/starwars.mp3"
+  },
+  "src/assets/audio/marvel.mp3": {
+    "file": "immutable/assets/marvel-d1cfc5cc.mp3",
+    "src": "src/assets/audio/marvel.mp3"
+  },
+  "src/assets/images/dc/atom.webp": {
+    "file": "immutable/assets/atom-bbe61524.webp",
+    "src": "src/assets/images/dc/atom.webp"
+  },
+  "src/assets/images/dc/firestorm.webp": {
+    "file": "immutable/assets/firestorm-c05260c9.webp",
+    "src": "src/assets/images/dc/firestorm.webp"
+  },
+  "src/assets/audio/nintendo.mp3": {
+    "file": "immutable/assets/nintendo-e2d89386.mp3",
+    "src": "src/assets/audio/nintendo.mp3"
+  },
+  "src/assets/images/nintendo/bowser.webp": {
+    "file": "immutable/assets/bowser-b768a69f.webp",
+    "src": "src/assets/images/nintendo/bowser.webp"
+  },
+  "src/assets/images/nintendo/marth.webp": {
+    "file": "immutable/assets/marth-f97ff8dc.webp",
+    "src": "src/assets/images/nintendo/marth.webp"
+  },
+  "src/assets/images/starwars/chewbacca.webp": {
+    "file": "immutable/assets/chewbacca-5190ad52.webp",
+    "src": "src/assets/images/starwars/chewbacca.webp"
+  },
+  "src/assets/images/starwars/emperor.webp": {
+    "file": "immutable/assets/emperor-b719789c.webp",
+    "src": "src/assets/images/starwars/emperor.webp"
+  },
+  "src/assets/images/starwars/greedo.webp": {
+    "file": "immutable/assets/greedo-8b2b0e2b.webp",
+    "src": "src/assets/images/starwars/greedo.webp"
+  },
+  "src/assets/images/starwars/imperial-guard.webp": {
+    "file": "immutable/assets/imperial-guard-556a032e.webp",
+    "src": "src/assets/images/starwars/imperial-guard.webp"
+  },
+  "src/assets/images/starwars/r2-d2.webp": {
+    "file": "immutable/assets/r2-d2-ca975ba2.webp",
+    "src": "src/assets/images/starwars/r2-d2.webp"
+  },
+  ".svelte-kit/runtime/client/start.js": {
+    "file": "immutable/start-21bc07fd.js",
+    "src": ".svelte-kit/runtime/client/start.js",
+    "isEntry": true,
+    "imports": [
+      "_index-bbfcb11e.js",
+      "_index-943027fe.js"
+    ],
+    "dynamicImports": [
+      "src/routes/__layout.svelte",
+      ".svelte-kit/runtime/components/error.svelte",
+      "src/routes/index.svelte"
+    ]
+  },
+  "src/routes/__layout.svelte": {
+    "file": "immutable/pages/__layout.svelte-256c6ee7.js",
+    "src": "src/routes/__layout.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_index-bbfcb11e.js",
+      "_store-cd758b39.js",
+      "_index-943027fe.js"
+    ],
+    "css": [
+      "immutable/assets/__layout-80d470df.css"
+    ],
+    "assets": [
+      "immutable/assets/marvel-d1cfc5cc.mp3",
+      "immutable/assets/dc-6da633ac.mp3",
+      "immutable/assets/starwars-0fa7f57f.mp3",
+      "immutable/assets/nintendo-e2d89386.mp3"
+    ]
+  },
+  ".svelte-kit/runtime/components/error.svelte": {
+    "file": "immutable/error.svelte-54542be4.js",
+    "src": ".svelte-kit/runtime/components/error.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_index-bbfcb11e.js"
+    ]
+  },
+  "src/routes/index.svelte": {
+    "file": "immutable/pages/index.svelte-d4606ed5.js",
+    "src": "src/routes/index.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_index-bbfcb11e.js",
+      "_store-cd758b39.js",
+      "_index-943027fe.js"
+    ],
+    "css": [
+      "immutable/assets/index-b279cf50.css"
+    ],
+    "assets": [
+      "immutable/assets/dc-5a421263.png",
+      "immutable/assets/nintendo-2a86ebc5.png",
+      "immutable/assets/atom-bbe61524.webp",
+      "immutable/assets/firestorm-c05260c9.webp",
+      "immutable/assets/bowser-b768a69f.webp",
+      "immutable/assets/marth-f97ff8dc.webp",
+      "immutable/assets/chewbacca-5190ad52.webp",
+      "immutable/assets/emperor-b719789c.webp",
+      "immutable/assets/greedo-8b2b0e2b.webp",
+      "immutable/assets/imperial-guard-556a032e.webp",
+      "immutable/assets/r2-d2-ca975ba2.webp"
+    ]
+  },
+  "_index-bbfcb11e.js": {
+    "file": "immutable/chunks/index-bbfcb11e.js"
+  },
+  "_index-943027fe.js": {
+    "file": "immutable/chunks/index-943027fe.js",
+    "imports": [
+      "_index-bbfcb11e.js"
+    ]
+  },
+  "_store-cd758b39.js": {
+    "file": "immutable/chunks/store-cd758b39.js",
+    "imports": [
+      "_index-bbfcb11e.js",
+      "_index-943027fe.js"
+    ]
+  },
+  "src/routes/__layout.css": {
+    "file": "immutable/assets/__layout-80d470df.css",
+    "src": "src/routes/__layout.css"
+  },
+  "src/routes/index.css": {
+    "file": "immutable/assets/index-b279cf50.css",
+    "src": "src/routes/index.css"
+  }
+}
